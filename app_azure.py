@@ -211,8 +211,8 @@ ruhsat_input = pn.widgets.TextInput(name='İnşaat Ruhsatı (m2)', placeholder='
 tufe_input = pn.widgets.TextInput(name='TÜFE-Yıllık', placeholder='Buraya enflasyon gir')
 
 
-message_outer = pd.widgets.StaticText(value = 'İşlem Henüz Başlamadı')
-message_inner = pd.widgets.StaticText(value = 'İşlem Henüz Başlamadı')
+message_outer = pn.widgets.StaticText(value = 'İşlem Henüz Başlamadı')
+message_inner = pn.widgets.StaticText(value = 'İşlem Henüz Başlamadı')
 
 
 def tahminleri_olustur():
