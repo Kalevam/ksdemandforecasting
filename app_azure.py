@@ -211,7 +211,8 @@ ruhsat_input = pn.widgets.TextInput(name='İnşaat Ruhsatı (m2)', placeholder='
 tufe_input = pn.widgets.TextInput(name='TÜFE-Yıllık', placeholder='Buraya enflasyon gir')
 
 
-
+message_outer = pd.widgets.StaticText(value = 'İşlem Henüz Başlamadı')
+message_inner = pd.widgets.StaticText(value = 'İşlem Henüz Başlamadı')
 
 
 def tahminleri_olustur():
@@ -243,6 +244,8 @@ def tahminleri_olustur():
         for kanal in kanal_list:
             #kanal = 'yurtdisi'
             monthly_sales_perakende = read_blob_file('monthly_sales/' + kanal + '.csv')
+            total_iterations = len(kanal_list)
+            message_outer.value = f'Dağıtım Kanalı İterasyonları {k+1}/{total_iterations}'
             
             monthly_sales_perakende['zaman'] = pd.to_datetime(monthly_sales_perakende['zaman'])
             monthly_sales_perakende.set_index('zaman', inplace = True)
@@ -373,6 +376,9 @@ def tahminleri_olustur():
                     #dfu = 'SKM DUV 20X20+25'
                     print("dfu",dfu)
                     monthly_sales_sku = read_blob_file('sales_sku/' +kanal +'/'+dfu+'.csv')
+                    total_iterations = len(dfu_list)
+                    message_inner.value = f'DFU/SKU İterasyonları {i+1}/{total_iterations}'
+
     
                     monthly_sales_sku['zaman'] = pd.to_datetime(monthly_sales_sku['zaman'])
                     monthly_sales_sku.set_index('zaman', inplace = True)
@@ -448,7 +454,7 @@ download_button = pn.widgets.FileDownload(
 )
 component_general_analysis = pn.Column(pn.Row(gaz_input,dolar_input, konut_satis_input),
                                        pn.Row(konut_faiz_input,ruhsat_input, tufe_input)
-                                   , pn.Column("## Excel Olarak Tahminleri İndir", download_button))
+                                   , pn.Column("## Excel Olarak Tahminleri İndir", download_button,message_outer, message_inner))
                                    #button_tahmin,pn.panel(pn.bind(tahminleri_olustur, button_tahmin), loading_indicator=True))
 
 tabs_machine = pn.Tabs(
