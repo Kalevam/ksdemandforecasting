@@ -211,8 +211,8 @@ ruhsat_input = pn.widgets.TextInput(name='İnşaat Ruhsatı (m2)', placeholder='
 tufe_input = pn.widgets.TextInput(name='TÜFE-Yıllık', placeholder='Buraya enflasyon gir')
 
 
-message_outer = pn.widgets.StaticText(value='İşlem henüz başlamadı')
-message_inner = pn.widgets.StaticText(value='İşlem henüz başlamadı')
+#message_outer = pn.widgets.StaticText(value='İşlem henüz başlamadı')
+#message_inner = pn.widgets.StaticText(value='İşlem henüz başlamadı')
 
 def tahminleri_olustur():
     print('Tahminler Oluşturuluyor!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
@@ -244,7 +244,7 @@ def tahminleri_olustur():
             #kanal = 'yurtdisi'
             monthly_sales_perakende = read_blob_file('monthly_sales/' + kanal + '.csv')
             total_iterations = len(kanal_list)
-            message_outer.value = f" Dağıtım Kanalı İterasyonları {k + 1}/{total_iterations}"
+            #message_outer.value = f" Dağıtım Kanalı İterasyonları {k + 1}/{total_iterations}"
             
             monthly_sales_perakende['zaman'] = pd.to_datetime(monthly_sales_perakende['zaman'])
             monthly_sales_perakende.set_index('zaman', inplace = True)
@@ -376,7 +376,7 @@ def tahminleri_olustur():
                     print("dfu",dfu)
                     monthly_sales_sku = read_blob_file('sales_sku/' +kanal +'/'+dfu+'.csv')
                     total_iterations_dfu = len(dfu_list)
-                    message_inner.value = f"DFU-SKU İterasyonları {i + 1}/{total_iterations_dfu}"
+                    #message_inner.value = f"DFU-SKU İterasyonları {i + 1}/{total_iterations_dfu}"
 
     
                     monthly_sales_sku['zaman'] = pd.to_datetime(monthly_sales_sku['zaman'])
