@@ -453,7 +453,7 @@ download_button = pn.widgets.FileDownload(
 )
 component_general_analysis = pn.Column(pn.Row(gaz_input,dolar_input, konut_satis_input),
                                        pn.Row(konut_faiz_input,ruhsat_input, tufe_input)
-                                   , pn.Column("## Excel Olarak Tahminleri İndir", download_button,message_outer, message_inner))
+                                   , pn.Column("## Excel Olarak Tahminleri İndir", download_button))
                                    #button_tahmin,pn.panel(pn.bind(tahminleri_olustur, button_tahmin), loading_indicator=True))
 
 tabs_machine = pn.Tabs(
