@@ -211,8 +211,8 @@ ruhsat_input = pn.widgets.TextInput(name='İnşaat Ruhsatı (m2)', placeholder='
 tufe_input = pn.widgets.TextInput(name='TÜFE-Yıllık', placeholder='Buraya enflasyon gir')
 
 
-#message_outer = pn.widgets.StaticText(value='İşlem henüz başlamadı')
-#message_inner = pn.widgets.StaticText(value='İşlem henüz başlamadı')
+message_outer = pn.widgets.StaticText(value='İşlem henüz başlamadı')
+message_inner = pn.widgets.StaticText(value='İşlem henüz başlamadı')
 
 def tahminleri_olustur():
     print('Tahminler Oluşturuluyor!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
@@ -244,7 +244,7 @@ def tahminleri_olustur():
             #kanal = 'yurtdisi'
             monthly_sales_perakende = read_blob_file('monthly_sales/' + kanal + '.csv')
             total_iterations = len(kanal_list)
-            #message_outer.value = f" Dağıtım Kanalı İterasyonları {k + 1}/{total_iterations}"
+            message_outer.value = f" Dağıtım Kanalı İterasyonları {k + 1}/{total_iterations}"
             
             monthly_sales_perakende['zaman'] = pd.to_datetime(monthly_sales_perakende['zaman'])
             monthly_sales_perakende.set_index('zaman', inplace = True)
@@ -453,7 +453,8 @@ download_button = pn.widgets.FileDownload(
 )
 component_general_analysis = pn.Column(pn.Row(gaz_input,dolar_input, konut_satis_input),
                                        pn.Row(konut_faiz_input,ruhsat_input, tufe_input)
-                                   , pn.Column("## Excel Olarak Tahminleri İndir", download_button))
+                                   , pn.Column("## Excel Olarak Tahminleri İndir", download_button,
+                                              message_outer,message_inner))
                                    #button_tahmin,pn.panel(pn.bind(tahminleri_olustur, button_tahmin), loading_indicator=True))
 
 tabs_machine = pn.Tabs(
